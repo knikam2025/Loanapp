@@ -58,8 +58,8 @@
             var loanAmt = parseInt(document.getElementById("Loan").value);
             var duration = 15; 
             var totalEMI = loanAmt / (duration * 12);
-            var interestEMI = loanAmt * (interest / (100 * 12)); // Interest component of EMI
-            var finalAmt = totalEMI + interestEMI; // Total EMI per month including interest
+            var interestEMI = loanAmt * (interest / (100 * 12)); 
+            var finalAmt = totalEMI + interestEMI; 
 
             document.getElementById("Emicalculate").innerHTML = "EMI: " + Math.round(finalAmt);
             console.log("EMI: " + Math.round(finalAmt));
