@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form id="iform">
+        <h1>Dear <span id="fname"></span>,</h1>
+        <p>Thank you for submitting the loan application with the email <span id="email"></span>. Please enter OTP:</p>
+        <form>
+            <input type="text" name="userotp" id="userotp" value="3">
+            <button onclick="checkotp()">Validate OTP</button>
+        </form>
+        <span id="success"></span>
+        <span id="failed"></span>
+    </form>
+    </div>
+
+    <script>
+
+        document.querySelector("#iform").addEventListener('submit', function(event){
+event.preventDefault();
+        })
+        let name = localStorage.getItem('fullname');
+        document.getElementById("fname").innerHTML = name;
+
+        let email = localStorage.getItem('email');
+        document.getElementById("email").innerHTML = email;
+
+        function checkotp() {
+            var userotp = document.getElementById("userotp").value;
+            var mainotp = localStorage.getItem("mainotp");
+            var attempt = 3;
+
+            if (userotp === mainotp) {
+
+document.getElementById("success").innerHTML = "OTP validation successful";
+}
+else
+{
+    document.getElementById("success").innerHTML = "OTP validation Failed";
+attempt --;
+alert("You have left "+attempt+" attempt;");
+if( attempt == 0)
+{
+alert('you are blocked');
+}
+}
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Application</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div>
+
+    <!-- Loan application Form -->
+    <form  id="loanform" >
+
+    <label for="FullName">Full Name</label>
+    <input type="text" name="FullName" id="FullName" pattern="[a-zA-Z]){5,}">
+    <br><br>
+
+    <label for="Email">Email</label>
+    <input type="email" name="Email" id="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>  <br><br>
+
+    <label for="Pan">Pan Number</label>
+    <input type="text" name="Pan" id="Pan" pattern="[a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}" required>
+
+<br>
+
+<label for="Loan">Loan Amount</label>
+<input id="Loan" type="text" />
+<br>
+
+<!-- Loan Amount calculate  -->
+<div>
+    <span id="Emicalculate"></span> <br>
+    <button type="button" onclick="calculateEMI()">Generate EMI</button>
+</div> <br>
+
+<input type="submit" name="submit" id="submit">
+ 
+    </form>
+</div>
+<script>
+    
+
+    document.querySelector("#loanform").addEventListener("submit", function(event){
+        event.preventDefault();
+        window.location.href = "/confirm.html"
+        var fullname = document.getElementById("FullName").value;
+        var email = document.getElementById("Email").value;
+        var pan = document.getElementById("Pan").value;
+
+        localStorage.setItem('fullname', fullname);
+        localStorage.setItem('email', email);
+       
+    })
+   
+    function calculateEMI() {
+            var interest = 8.5; 
+            var loanAmt = parseInt(document.getElementById("Loan").value);
+            var duration = 15; 
+            var totalEMI = loanAmt / (duration * 12);
+            var interestEMI = loanAmt * (interest / (100 * 12)); // Interest component of EMI
+            var finalAmt = totalEMI + interestEMI; // Total EMI per month including interest
+
+            document.getElementById("Emicalculate").innerHTML = "EMI: " + Math.round(finalAmt);
+            console.log("EMI: " + Math.round(finalAmt));
+        }
+
+        var form = document.querySelector('#loanform');
+ form.addEventListener('submit',()=>{
+    var otp = Math.round(Math.random()*1000+1000);
+    alert(otp)
+    
+localStorage.setItem('mainotp', otp)
+ });
+
+
+</script>
+    
+</body>
+</html>
